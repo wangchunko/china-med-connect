@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Doctor {
+  id                 String              @id @default(cuid())
+  fullName           String              @unique
+  avatarUrl          String?
+  title              String?
+  hospital           String              @default("")
+  experienceYears    Int                 @default(0)
+  bio                String              @default("")
+  specialtyDesc      String              @default("")
+  consultationFee    Int                 @default(0)
+  profile            String              @default("")
+  intlCertification  String              @default("")
+  techAdvantages     String              @default("")
+  primaryCategory    String              @default("常规病症咨询")
+  tags               String              @default("")
+  customPrompt       String?
+  knowledgeFiles     String              @default("")
+  knowledgeDocuments KnowledgeDocument[]
+  appointments       Appointment[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+}
+
+model KnowledgeDocument {
+  id          String   @id @default(cuid())
+  doctorId    String
+  title       String
+  content     String
+  language    String   @default("en")
+  sourceUrl   String?
+  doctor      Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([doctorId])
+  @@index([language])
+}
+
+model HealthArticle {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  summary       String?
+  content       String
+  language      String   @default("en")
+  locale        String   @default("en-US")
+  published     Boolean  @default(false)
+  publishedAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([language, locale])
+  @@index([published])
+}
+
+model ConsultationSession {
+  id                 String   @id @default(cuid())
+  doctorId           String?
+  userDisplayName    String?
+  userLocale         String   @default("en-US")
+  messageHistoryJson String
+  startedAt          DateTime @default(now())
+  endedAt            DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([doctorId])
+  @@index([userLocale])
+}
+
+model Appointment {
+  id          String   @id @default(cuid())
+  doctorId    String
+  patientName String
+  symptoms    String
+  status      String   @default("PENDING")
+  doctor      Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@index([doctorId])
+  @@index([status])
+}
