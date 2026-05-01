@@ -3,7 +3,7 @@ import Link from "next/link";
 import { HeartPulse } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "华医连",
+  title: "灵犀智问",
 };
 
 export default function PublicLayout({
@@ -33,16 +33,9 @@ export default function PublicLayout({
             <span className="grid size-9 place-items-center rounded-xl bg-teal-50 ring-1 ring-teal-100">
               <HeartPulse className="size-4.5 text-teal-700" />
             </span>
-            华医连
+            灵犀智问
           </Link>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/admin"
-              className="text-sm text-slate-600 hover:text-slate-900"
-            >
-              管理后台
-            </Link>
-          </div>
+          <div className="flex items-center gap-3" />
         </div>
       </header>
 

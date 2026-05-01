@@ -57,7 +57,7 @@ export default async function DoctorKnowledgePage({ params }: PageProps) {
     <section className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Link
-          href="/admin/doctors"
+          href="/boss-panel/doctors"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           ← 返回医生列表

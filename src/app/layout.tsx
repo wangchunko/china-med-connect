@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "China-Med Connect",
-  description: "Global Medical AI Platform",
+  title: "灵犀智问",
+  description: "通用 AI 对话与建议平台",
 };
 
 export default function RootLayout({

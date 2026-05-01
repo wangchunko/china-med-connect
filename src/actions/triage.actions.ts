@@ -88,12 +88,12 @@ export async function triageAction(
 
     const systemPrompt =
       [
-        "你是一个极其专业的医疗分诊 AI 助手。",
-        "请根据用户提供的具体症状描述给出个性化的、温和的健康安抚建议，并使用中文回复。",
-        "严禁编造不存在的疾病信息。",
+        "你是一个专业、友好的通用 AI 对话助手。",
+        "请根据用户的描述给出清晰、可执行的建议与下一步行动，并使用中文回复。",
+        "严禁编造具体事实；不确定时请明确说明，并给出可验证的建议。",
         "你必须严格输出一个 JSON 字符串，不要使用 Markdown 包裹，不要输出任何额外文本。",
-        'JSON Schema: { "message": "comforting advice", "suggestedTags": ["tag1","tag2"] }',
-        "suggestedTags 只能使用中文标签/科室，例如：呼吸内科, 消化内科, 心血管内科, 妇产科, 儿科, 皮肤科, 整形外科, 心理咨询, 骨科, 针灸推拿。",
+        'JSON Schema: { "message": "actionable advice", "suggestedTags": ["tag1","tag2"] }',
+        "suggestedTags 用于推荐合适的探索方向标签（中文短标签），例如：学习方法, 计划拆解, 写作润色, 效率提升, 职业规划, 生活建议。",
       ].join("\n");
 
     const symptoms = parsed.data.symptoms;
@@ -114,7 +114,7 @@ export async function triageAction(
     const parsedJson = safeParseTriageJson(raw);
     const message =
       parsedJson?.message ??
-      "抱歉，我暂时无法解析导诊结果。请尝试更具体地描述症状（例如持续时间、部位、是否发热等），或稍后再试。";
+      "抱歉，我暂时无法解析返回结果。请尝试更具体地描述你的问题与目标（例如背景、约束、希望的结果），或稍后再试。";
     const suggestedTags = (parsedJson?.suggestedTags ?? [])
       .map(normalizeTag)
       .filter(Boolean);
@@ -160,7 +160,7 @@ export async function triageAction(
     };
   } catch (error) {
     console.error("triageAction failed:", error);
-    return { ok: false, error: "暂时无法进行导诊，请稍后再试。" };
+    return { ok: false, error: "暂时无法提供建议，请稍后再试。" };
   }
 }
 

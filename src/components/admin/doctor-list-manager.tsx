@@ -144,7 +144,7 @@ export function DoctorListManager({
                         variant="outline"
                         size="sm"
                         onClick={() =>
-                          router.push(`/admin/doctors/${d.id}/knowledge`)
+                          router.push(`/boss-panel/doctors/${d.id}/knowledge`)
                         }
                       >
                         <BookOpen className="mr-2 size-4" />

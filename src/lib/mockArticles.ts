@@ -9,11 +9,12 @@ export type MockArticle = {
   content: string[];
 };
 
+// Use local static placeholders from /public/placeholders to avoid external 404s.
 const imagePool = [
-  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=800&q=80",
+  "/placeholders/cover-1.svg",
+  "/placeholders/cover-2.svg",
+  "/placeholders/cover-3.svg",
+  "/placeholders/cover-4.svg",
 ] as const;
 
 export const articles: MockArticle[] = [

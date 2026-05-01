@@ -98,10 +98,10 @@ export function HealthArticles() {
     >
       <header className="space-y-1">
         <h2 className="text-lg font-semibold tracking-tight text-slate-900">
-          健康资讯
+          精选内容
         </h2>
         <p className="text-sm text-slate-600">
-          精选科普与就医指南，帮助您更好地了解身体信号。
+          精选文章与工具方法，帮助您更高效地学习与解决问题。
         </p>
       </header>
 

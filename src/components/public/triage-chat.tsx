@@ -32,20 +32,20 @@ type ChatMessage = {
   recommendedDoctors?: RecommendedDoctor[];
 };
 
-const welcomeMessage = `您好！我是华医连智能导诊助手。您可以向我描述您或家人的症状，我会为您初步分析并推荐合适的专家。
+const welcomeMessage = `您好！我是灵犀智问智能对话助手。您可以向我描述您的问题、目标或困扰，我会为您梳理思路并给出可执行的建议。
 
 您可以这样问我：
-- 描述具体症状、持续时间和感受
-- 询问特定疾病的日常护理建议
-- 咨询应该挂哪个科室
+- 描述现状、约束条件与期望结果
+- 询问某个主题的学习路径/方法建议
+- 请我帮你拆解任务并给出下一步行动
 
-⚠️ 提示：本系统仅提供导诊与健康咨询，不作为最终诊断依据。如遇突发急症，请立即拨打 120。`;
+⚠️ 提示：本系统仅提供信息与建议，不作为权威结论依据。遇到紧急情况请优先联系相关专业机构。`;
 
 const starterChips = [
-  "我家西可最近晚上总是不爱吃饭，肚肚有点胀，需要去医院吗？",
-  "平时经常久坐办公，最近低头时觉得颈椎酸痛，偶尔手麻...",
-  "春季换季，脸颊容易泛红起皮，这属于皮肤过敏吗？",
-  "我最近经常熬夜加班，偶尔觉得胸闷气短，应该挂什么科？",
+  "帮我把一个复杂目标拆成 7 天可执行计划（每天 30 分钟）。",
+  "我最近效率很低、容易分心，能给我一套可坚持的改进方法吗？",
+  "我正在准备转行，如何评估方向并制定学习路线？",
+  "我遇到一个难题，先帮我澄清问题，再给 3 个可选方案与风险。",
 ];
 
 export function TriageChat() {
@@ -94,7 +94,7 @@ export function TriageChat() {
             m.id === assistantMsgId
               ? {
                   ...m,
-                  content: result.error ?? "暂时无法进行导诊，请稍后再试。",
+                  content: result.error ?? "暂时无法提供建议，请稍后再试。",
                   recommendedDoctors: [],
                 }
               : m
@@ -122,7 +122,7 @@ export function TriageChat() {
   return (
     <div className="lg:h-full lg:min-h-0">
       <div className="mx-auto max-w-4xl lg:h-full lg:min-h-0">
-        <div className="rounded-3xl bg-white/70 p-6 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_-25px_rgba(15,23,42,0.25)] lg:h-full lg:min-h-0 lg:flex lg:flex-col">
+        <div className="rounded-3xl bg-white/70 p-7 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_-25px_rgba(15,23,42,0.25)] lg:h-full lg:min-h-0 lg:flex lg:flex-col lg:p-8">
           <Card className="overflow-hidden border-0 shadow-none lg:h-full lg:min-h-0 lg:flex lg:flex-col">
             <CardHeader className="border-b border-white/30 bg-teal-50/40 py-4 backdrop-blur-md">
             <div className="flex items-center gap-3">
@@ -132,9 +132,9 @@ export function TriageChat() {
                 </AvatarFallback>
               </Avatar>
               <div className="leading-tight">
-                <CardTitle className="text-base">AI 智能导诊</CardTitle>
+                <CardTitle className="text-base">灵犀智问</CardTitle>
                 <p className="text-xs text-muted-foreground">
-                  描述症状，获得初步建议与专家推荐。
+                  描述问题，获得清晰建议与下一步行动。
                 </p>
               </div>
             </div>
@@ -144,7 +144,7 @@ export function TriageChat() {
             <div className="flex h-[620px] flex-col lg:h-full lg:min-h-0">
               <div className="flex-1 min-h-0 overflow-y-auto bg-transparent px-4 py-4">
                 <div className="mx-auto max-w-xl rounded-3xl border border-white/40 bg-white/70 p-4 text-sm text-slate-600 backdrop-blur-md shadow-[0_10px_40px_-18px_rgba(15,23,42,0.18)]">
-                  这是用于 MVP 的 AI 智能导诊演示。若遇紧急情况，请立即联系当地急救服务。
+                  这是用于 MVP 的 AI 对话演示。请尽量提供背景与目标，我会给出更贴合的建议与行动步骤。
                 </div>
 
                 <div className="mt-4 space-y-3">
@@ -206,7 +206,7 @@ export function TriageChat() {
                                       "mt-3 w-fit bg-teal-600 text-white hover:bg-teal-700"
                                     )}
                                   >
-                                    去问诊
+                                    继续咨询
                                   </Link>
                                 </div>
                               ))}
@@ -268,8 +268,8 @@ export function TriageChat() {
                           }
                         }}
                         placeholder="描述您的症状或问题...（回车发送，Shift+Enter 换行）"
-                        rows={2}
-                        className="min-h-[52px] w-full resize-none rounded-full bg-white/70 px-4 py-3 leading-relaxed backdrop-blur-md ring-1 ring-white/60 shadow-inner shadow-slate-900/5 focus-visible:ring-2 focus-visible:ring-teal-200"
+                        rows={4}
+                        className="min-h-[84px] max-h-[180px] w-full resize-none overflow-y-auto rounded-3xl bg-white/70 px-5 py-4 text-[15px] leading-relaxed backdrop-blur-md ring-1 ring-white/60 shadow-inner shadow-slate-900/5 focus-visible:ring-2 focus-visible:ring-teal-200"
                         disabled={isPending}
                       />
                     </div>
@@ -278,12 +278,12 @@ export function TriageChat() {
                       type="submit"
                       className={cn(
                         buttonVariants(),
-                        "shrink-0 h-[52px] rounded-full px-5 bg-teal-600 text-white hover:bg-teal-700 transition-all duration-300 ease-in-out hover:shadow-[0_12px_30px_-12px_rgba(0,128,128,0.25)] hover:scale-[1.01]",
+                        "shrink-0 h-[84px] rounded-3xl px-6 bg-teal-600 text-white hover:bg-teal-700 transition-all duration-300 ease-in-out hover:shadow-[0_12px_30px_-12px_rgba(0,128,128,0.25)] hover:scale-[1.01]",
                         isPending ? "opacity-70" : ""
                       )}
                       disabled={isPending || !draft.trim()}
                     >
-                      {isPending ? "导诊中…" : "开始导诊"}
+                      {isPending ? "思考中…" : "开始对话"}
                     </button>
                   </div>
                 </form>

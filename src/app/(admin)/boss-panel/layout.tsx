@@ -5,9 +5,9 @@ type AdminLayoutProps = {
 };
 
 const navItems = [
-  { href: "/admin/doctors", label: "医生管理" },
-  { href: "/admin/content", label: "健康内容" },
-  { href: "/admin/consultations", label: "问诊会话" },
+  { href: "/boss-panel/doctors", label: "专家管理" },
+  { href: "/boss-panel/content", label: "内容管理" },
+  { href: "/boss-panel/consultations", label: "对话会话" },
 ];
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <aside className="rounded-xl border bg-sidebar p-4 text-sidebar-foreground">
           <div className="mb-6">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              China-Med Connect
+              灵犀智问
             </p>
             <h2 className="text-lg font-semibold">运营后台</h2>
           </div>

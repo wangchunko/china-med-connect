@@ -148,15 +148,15 @@ export function AIConsultationRoom({ doctorId, doctorName }: Props) {
                 render={
                   <Button type="button" size="sm" className="h-8">
                     <CalendarPlus className="mr-2 size-4" />
-                    预约挂号
+                    预约咨询
                   </Button>
                 }
               />
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>预约挂号</DialogTitle>
+                  <DialogTitle>预约咨询</DialogTitle>
                   <DialogDescription>
-                    提交您的信息，诊所团队将与您确认具体时间。
+                    提交您的信息，我们会与您确认具体时间。
                   </DialogDescription>
                 </DialogHeader>
 
@@ -170,7 +170,7 @@ export function AIConsultationRoom({ doctorId, doctorName }: Props) {
                       const result = await createAppointment(fd, doctorId);
                       if (!result.ok) {
                         toast.error(
-                          result.error ?? "暂时无法预约挂号，请稍后再试。"
+                          result.error ?? "暂时无法提交预约，请稍后再试。"
                         );
                         return;
                       }
@@ -183,7 +183,7 @@ export function AIConsultationRoom({ doctorId, doctorName }: Props) {
                   className="space-y-4"
                 >
                   <div className="space-y-2">
-                    <Label htmlFor="patientName">就诊人姓名</Label>
+                    <Label htmlFor="patientName">联系人姓名</Label>
                     <Input
                       id="patientName"
                       name="patientName"
@@ -193,11 +193,11 @@ export function AIConsultationRoom({ doctorId, doctorName }: Props) {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="symptoms">症状 / 备注</Label>
+                    <Label htmlFor="symptoms">问题 / 备注</Label>
                     <Textarea
                       id="symptoms"
                       name="symptoms"
-                      placeholder="请简要描述症状、持续时间及相关备注…"
+                      placeholder="请简要描述您的问题、背景与相关备注…"
                       rows={5}
                       className="min-h-[140px]"
                       disabled={isBookingPending}
@@ -239,7 +239,7 @@ export function AIConsultationRoom({ doctorId, doctorName }: Props) {
           <div className="flex-1 overflow-y-auto bg-muted/10 px-4 py-4">
             {messages.length === 0 ? (
               <div className="mx-auto max-w-sm rounded-xl border bg-background p-4 text-sm text-muted-foreground shadow-sm">
-                可咨询症状或健康问题。本回复仅供参考，不构成医疗诊断或治疗建议。
+                可以聊聊你的问题与目标。我会尽量给出清晰的建议与下一步行动（仅供参考）。
               </div>
             ) : null}
 

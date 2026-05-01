@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { z } from "zod";
+import { UserRound } from "lucide-react";
 
 import { prisma } from "@/lib/prisma";
 
@@ -84,17 +85,20 @@ export default async function DoctorProfilePage({ params }: PageProps) {
                 <div className="relative size-20 shrink-0 md:size-24">
                   <span className="absolute inset-[-6px] rounded-full bg-white/40 blur-[2px] animate-[breathe-ring_2.8s_ease-in-out_infinite]" />
                   <div className="relative size-full overflow-hidden rounded-full ring-1 ring-white/60 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
-                    <Image
-                      src={
-                        doctor.avatarUrl ||
-                        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=256&q=80"
-                      }
-                      alt={doctor.fullName}
-                      fill
-                      className="object-cover"
-                      sizes="96px"
-                      priority
-                    />
+                    {doctor.avatarUrl ? (
+                      <Image
+                        src={doctor.avatarUrl}
+                        alt={doctor.fullName}
+                        fill
+                        className="object-cover"
+                        sizes="96px"
+                        priority
+                      />
+                    ) : (
+                      <div className="grid size-full place-items-center bg-gradient-to-br from-teal-500/20 via-white to-sky-500/15">
+                        <UserRound className="size-10 text-teal-700/70" />
+                      </div>
+                    )}
                   </div>
                 </div>
 

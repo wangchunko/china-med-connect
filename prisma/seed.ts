@@ -91,22 +91,15 @@ function buildSpecialtyDesc(d: SeedDoctor) {
   return `重点方向：${tags || d.primaryCategory}。提供症状初筛、风险分层与可执行的家庭观察要点；出现红旗征象时给出明确就医建议与转诊路径。`;
 }
 
-const avatarPool = [
-  // Removed broken/404-prone Unsplash asset; keep pool stable.
-  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1580281658629-8176a33f4f9c?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1551887373-6c5bd0b5f6a9?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=256&q=80",
-  "https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&w=256&q=80",
-];
+const localAvatarPool = [
+  "/placeholders/avatar-1.svg",
+  "/placeholders/avatar-2.svg",
+  "/placeholders/avatar-3.svg",
+  "/placeholders/avatar-4.svg",
+] as const;
 
-function pickAvatar(i: number) {
-  return avatarPool[i % avatarPool.length];
+function pickAvatar(_i: number) {
+  return localAvatarPool[_i % localAvatarPool.length];
 }
 
 function makeProfileLine(primaryCategory: SeedDoctor["primaryCategory"], tags: string) {
