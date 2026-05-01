@@ -15,8 +15,9 @@ export function middleware(req: NextRequest) {
     const key = process.env.BOSS_PANEL_KEY;
     const cookie = req.cookies.get("boss_panel_auth")?.value;
 
-    // If no key is configured, deny by default (safe).
-    if (!key || cookie !== key) {
+    // If no key is configured, allow access (dev-friendly default).
+    // If a key is configured, require matching cookie.
+    if (key && cookie !== key) {
       const url = req.nextUrl.clone();
       url.pathname = "/";
       return NextResponse.redirect(url);
