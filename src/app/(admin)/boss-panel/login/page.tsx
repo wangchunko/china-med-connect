@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { KeyRound } from "lucide-react";
 
-export default function BossPanelLoginPage() {
+function BossPanelLoginInner() {
   const router = useRouter();
   const sp = useSearchParams();
   const next = sp.get("next") || "/boss-panel";
@@ -75,6 +75,16 @@ export default function BossPanelLoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function BossPanelLoginPage() {
+  return (
+    <Suspense
+      fallback={<div className="mx-auto w-full max-w-md text-sm text-slate-600" />}
+    >
+      <BossPanelLoginInner />
+    </Suspense>
   );
 }
 
